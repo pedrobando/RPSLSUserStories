@@ -2,4 +2,4 @@
 const Game = require('./Game');
 
 //Ask if multiplayer or solo
-Game.mainRun(type);
+Game.mainRun();

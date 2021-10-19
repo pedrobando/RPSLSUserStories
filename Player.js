@@ -1,11 +1,18 @@
 class Player{
 
-    constructor(name, type, gesture){
+    constructor(name){
         this.name = name;
-        this.type = type;
-        this.gesture = gesture;
+        this.gestures = ["Rock", "Scissors", "Paper", "Lizard", "Spock"];
+        this.gesture 
+        this.score = 0
     }
+
+    chooseGesture(){
+        
+    }
+
 }
+
 
 module.exports = {
     Player:Player

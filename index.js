@@ -1,5 +1,11 @@
 "use strict";
-const Game = require('./Game');
+//import
+const PromptSync = require('prompt-sync');
+const {Game} = require('./Game');
 
-//Ask if multiplayer or solo
-Game.mainRun();
+
+// instantiation
+let game1 = new Game();
+
+//execution
+game1.gameType();

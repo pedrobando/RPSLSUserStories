@@ -1,16 +1,17 @@
-const player = require('./Player');
+const {player} = require('./Player');
 const PromptSync = require('prompt-sync')();
 
 class Game{
-
     constructor(type){
         this.type = type;
     }
-
-    mainRun(){
-        console.log("Welcome! Please enter 'multiplayer' or 'solo'.")
+    gameType(){
+        console.log("Welcome! Please enter your game type. 'multiplayer' or 'solo'.");
         let type = PromptSync();
+        mainRun(type);
+    }
 
+    mainRun(type){
         if(type == "solo"){
             //run Solo script
         }

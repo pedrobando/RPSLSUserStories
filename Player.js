@@ -8,7 +8,7 @@ class Player{
     }
 
     chooseGesture(){
-
+        return this.gesture;
     }
 
 }

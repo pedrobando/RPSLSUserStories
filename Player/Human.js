@@ -3,13 +3,14 @@ const {Player} = require("../Player");
 
 class Human extends Player{
     constructor(name){
-        super(name);
-        super(gesture);
+        super(name, gesture);
+    
     }
 
     chooseGesture(){
         console.log("Please type your choice. 'Rock', 'Paper', 'Scissors', 'Lizard', or 'Spock'");
-        gesture = PromptSync();
+        this.gesture = PromptSync().toLowerCase();
+        return this.gesture;
     }
 }
 

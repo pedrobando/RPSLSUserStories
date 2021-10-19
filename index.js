@@ -1,4 +1,5 @@
 "use strict";
 const Game = require('./Game');
 
-Game();
+//Ask if multiplayer or solo
+Game.mainRun(type);

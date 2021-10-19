@@ -15,8 +15,7 @@ class Game{
                 console.log("Great! What is your name?");
                 let player1 = PromptSync();
                 this.player1 = new Human(player1);
-                //this.player2 = new Ai();
-                console.log("Solooooo");
+                this.player1.chooseGesture();
                 break;
             case 'multiplayer':
                 console.log("Multiplayerr");

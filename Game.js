@@ -9,11 +9,11 @@ class Game{
         this.player2 ;
     }
     
-    mainRun(){
+    mainMenu(){
         let type = this.gameType();
         switch(type){
             case 'solo':
-                this.startSolo()
+                this.soloGame()
                 break;
             case 'multiplayer':
                 this.startMulti();
@@ -33,9 +33,8 @@ class Game{
     startSolo(){
         console.log("Great! What is your name?");
         let playerName = PromptSync();
-        let player1 = new Human(playerName);
-        let player2 = new Ai("Node");
-        return match(player1.chooseGesture, player2.chooseGesture, player1, player2);
+        this.player1 = new Human(playerName);
+        this.player2 = new Ai("Node");
     }
 
     startMulti(){
@@ -45,71 +44,95 @@ class Game{
         console.log("Great! What is Player 2's name?");
         let player2Name = PromptSync();
         this.player2 = new Human(player2Name);
-        return match(player1.chooseGesture, player2.chooseGesture, player1, player2);
+        return match(this.player1.chooseGesture(), this.player2.chooseGesture(), this.player1, this.player2);
     }
 
-    check4Score(player1, player2){
-        if(player1.score == 3 || player2.score == 3){
-            console.log(`Match is over! Final result:\nPlayer 1: ${player1.score}\nPlayer 2: {player2.score}`);
-            return this.mainRun();
+    check4Score(){
+        if(this.player1.score == 3 || this.player2.score == 3){
+            console.log(`Match is over! Final result:\nPlayer 1: ${this.player1.score}\nPlayer 2: {this.player2.score}`);
+            this.mainMenu();
         }
     }
 
-    match(gestureP1, gestureP2, player1, player2){
-        // Lets check for scores first!
-        check4Score(player1, player2);
+    displayScore(){
+        console.log(`The score is: ${this.player1.name}:${this.player1.score} | ${this.player2.name}:${this.player2.score}\n${this.player1.name} had ${gestureP1} and ${this.player2.name} had ${gestureP2}\n`);
+    }
 
+    match(gestureP1, gestureP2){
         //Lets check hand logic
-       
+        if(gestureP1 == gestureP2){
+            this.displayScore();
+        }
         // rock
-        if(gestureP1 == "rock" && (gestureP2 !== "spock" || gestureP2 !== "paper")){
-            player1.score++;
-            match(player1.chooseGesture, player2.chooseGesture);
+        else if(gestureP1 == "rock" && (gestureP2 == "spock" || gestureP2 == "paper")){
+            this.player2.score++;
+            this.displayScore();
+            
         }
-        else{
-            player2.score++;
-            match(player1.chooseGesture, player2.chooseGesture);
+        else if(gestureP1 == "rock" && (gestureP2 !== "spock" || gestureP2 !== "paper")){
+            this.player1.score++;
+            this.displayScore();
+            
         }
-    
         // paper
-        if(gestureP1 == "paper" && (gestureP2 !== "scissors" || gestureP2 !== "lizard")){
-            player1.score++;
-            match(player1.chooseGesture, player2.chooseGesture);
+        else if(gestureP1 == "paper" && (gestureP2 == "scissors" || gestureP2 == "lizard")){
+            this.player2.score++;
+            this.displayScore();
+           
         }
-        else{
-            player2.score++;
-            match(player1.chooseGesture, player2.chooseGesture);
+        else if(gestureP1 == "paper" && (gestureP2 !== "scissors" || gestureP2 !== "lizard")){
+            this.player1.score++;
+            this.displayScore();
+           
         }
-    
         // scissors
-        if(gestureP1 == "scissors" && (gestureP2 !== "rock" || gestureP2 !== "spock")){
-            player1.score++;
-            match(player1.chooseGesture, player2.chooseGesture);
-        }
-        else{
+        else if(gestureP1 == "scissors" && (gestureP2 == "rock" || gestureP2 == "spock")){
             player2.score++;
-            match(player1.chooseGesture, player2.chooseGesture);
+            this.displayScore();
+           
         }
-    
+        else if(gestureP1 == "scissors" && (gestureP2 !== "rock" || gestureP2 !== "spock")){
+            this.player1.score++;
+            this.displayScore();
+            
+        }
         // lizard
-        if(gestureP1 == "lizard" && (gestureP2 !== "rock" || gestureP2 !== "scissors")){
-            player1.score++;
-            match(player1.chooseGesture, player2.chooseGesture);
+        else if(gestureP1 == "lizard" && (gestureP2 == "rock" || gestureP2 == "scissors")){
+            this.player2.score++;
+            this.displayScore();
+            
         }
-        else{
-            player2.score++;
-            match(player1.chooseGesture, player2.chooseGesture);
-        }
+        else if(gestureP1 == "lizard" && (gestureP2 !== "rock" || gestureP2 !== "scissors")){
+          this.player1.score++;
+          this.displayScore();
     
+        }
+        
         //spock
-        if(gestureP1 == "spock" && (gestureP2 !== "paper" || gestureP2 !== "lizard")){
-            player1.score++;
-            match(player1.chooseGesture, player2.chooseGesture);
+        else if(gestureP1 == "spock" && (gestureP2 == "paper" || gestureP2 == "lizard")){
+            this.player2.score++;
+            this.displayScore();
+            
         }
+        else if(gestureP1 == "spock" && (gestureP2 !== "paper" || gestureP2 !== "lizard")){
+           this.player1.score++;
+           this.displayScore();
+            
+        }
+        
         else{
-            player2.score++;
-            match(player1.chooseGesture, player2.chooseGesture);
+            console.log(`I don't know who won. ${this.player1.name}s gesture is ${gestureP1}. ${this.player2.name}s gesture is ${gestureP2}`)
         }
+    }
+
+    soloGame(){
+        this.startSolo();
+        while(this.player1.score < 3 && this.player2.score <3){
+            this.player1.chooseGesture();
+            this.player2.chooseGesture();
+            this.match(this.player1.gesture, this.player2.gesture);
+        }
+        this.mainMenu();    
     }
 
 }

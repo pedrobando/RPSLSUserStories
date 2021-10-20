@@ -8,4 +8,4 @@ const {Game} = require('./Game');
 let game1 = new Game();
 
 //execution
-game1.mainRun();
+game1.mainMenu();

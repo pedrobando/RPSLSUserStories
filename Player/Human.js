@@ -6,13 +6,19 @@ class Human extends Player{
         super(name);
     
     }
-
+    validateInput(){
+        if(this.gesture != "rock" && this.gesture != "paper" && this.gesture != "scissors" && this.gesture != "lizard" && this.gesture != "spock"){
+            return this.chooseGesture();
+        }
+    }
     chooseGesture(){
         console.log("Please type your choice. 'Rock', 'Paper', 'Scissors', 'Lizard', or 'Spock'");
         this.gesture = PromptSync();
-        //this.gesture = this.gestures[3];
         this.gesture = this.gesture.toLowerCase();
+        validateInput();
     }
+
+    
 }
 
 module.exports ={

@@ -11,12 +11,14 @@ class Game{
     
     mainMenu(){
         let type = this.gameType();
+        type = type.toLowerCase();
+        this.validateGame(type);
         switch(type){
             case 'solo':
                 this.soloGame()
                 break;
             case 'multiplayer':
-                this.startMulti();
+                this.multiGame();
                 break;
             case 'exit':
                 break;    
@@ -27,6 +29,13 @@ class Game{
         console.log("Welcome! Please enter your game type. 'multiplayer' or 'solo'. Please enter 'exit' if you wish not to continue.");
         let type = PromptSync();
         return type;
+    }
+    
+    validateGame(type){
+        if(type != "solo" && type != "multiplayer" && type != "exit"){
+            console.log("Please enter a valid option.\n\n")
+            return this.mainMenu();
+        }
     }
 
 
@@ -44,7 +53,6 @@ class Game{
         console.log("Great! What is Player 2's name?");
         let player2Name = PromptSync();
         this.player2 = new Human(player2Name);
-        return match(this.player1.chooseGesture(), this.player2.chooseGesture(), this.player1, this.player2);
     }
 
     check4Score(){
@@ -55,7 +63,7 @@ class Game{
     }
 
     displayScore(){
-        console.log(`The score is: ${this.player1.name}:${this.player1.score} | ${this.player2.name}:${this.player2.score}\n${this.player1.name} had ${gestureP1} and ${this.player2.name} had ${gestureP2}\n`);
+        console.log(`The score is: ${this.player1.name}:${this.player1.score} | ${this.player2.name}:${this.player2.score}\n${this.player1.name} had ${this.player1.gesture} and ${this.player2.name} had ${this.player2.gesture}\n`);
     }
 
     match(gestureP1, gestureP2){
@@ -134,6 +142,18 @@ class Game{
         }
         this.mainMenu();    
     }
+
+    multiGame(){
+        this.startMulti();
+        while(this.player1.score < 3 && this.player2.score <3){
+            this.player1.chooseGesture();
+            this.player2.chooseGesture();
+            this.match(this.player1.gesture, this.player2.gesture);
+        }
+        this.mainMenu();
+    }
+
+    
 
 }
 

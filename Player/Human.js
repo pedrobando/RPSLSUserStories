@@ -6,17 +6,21 @@ class Human extends Player{
         super(name);
     
     }
+    
+    chooseGesture(){
+        console.log(` ${this.name }, please type your choice. 'Rock', 'Paper', 'Scissors', 'Lizard', or 'Spock'`);
+        this.gesture = PromptSync();
+        this.gesture = this.gesture.toLowerCase();
+        this.validateInput();
+    }
+
     validateInput(){
-        if(this.gesture != "rock" && this.gesture != "paper" && this.gesture != "scissors" && this.gesture != "lizard" && this.gesture != "spock"){
+        if(this.gesture != "rock" && this.gesture != "paper" && this.gesture != "scissors" && this.gesture != "lizard" && this.gesture != "spock" ){
+            console.log("Please enter a valid option.\n\n")
             return this.chooseGesture();
         }
     }
-    chooseGesture(){
-        console.log("Please type your choice. 'Rock', 'Paper', 'Scissors', 'Lizard', or 'Spock'");
-        this.gesture = PromptSync();
-        this.gesture = this.gesture.toLowerCase();
-        validateInput();
-    }
+
 
     
 }

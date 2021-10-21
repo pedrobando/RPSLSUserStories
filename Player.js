@@ -11,7 +11,11 @@ class Player{
         return this.gesture;
     }
 
-  
+    gesturePopulator(){
+        //let g1 = new Rock();
+        //....
+        //this.gestures.push(g1)
+    }
 
 }
 

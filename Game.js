@@ -27,7 +27,9 @@ class Game{
 
     gameType(){
         console.log("Welcome! Please enter your game type. 'multiplayer' or 'solo'. Please enter 'exit' if you wish not to continue.");
-        let type = PromptSync();
+        let vType = PromptSync();
+        this.validateGame(vType);
+        type = vType
         return type;
     }
     

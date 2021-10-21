@@ -9,13 +9,13 @@ class Human extends Player{
     
     chooseGesture(){
         console.log(` ${this.name }, please type your choice. 'Rock', 'Paper', 'Scissors', 'Lizard', or 'Spock'`);
-        this.gesture = PromptSync();
-        this.gesture = this.gesture.toLowerCase();
-        this.validateInput();
+        let uGesture = PromptSync();
+        this.validateInput(uGesture);
+        this.gesture = uGesture.toLowerCase();
     }
 
-    validateInput(){
-        if(this.gesture != "rock" && this.gesture != "paper" && this.gesture != "scissors" && this.gesture != "lizard" && this.gesture != "spock" ){
+    validateInput(gesture){
+        if(gesture != "rock" && gesture != "paper" && gesture != "scissors" && gesture != "lizard" && gesture != "spock" ){
             console.log("Please enter a valid option.\n\n")
             return this.chooseGesture();
         }
